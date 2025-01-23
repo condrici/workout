@@ -1,5 +1,4 @@
 {
-    "name": "Service Container",
     "type": "project",
     "require": {
         "psr/container": "^2.0"
