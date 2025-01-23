@@ -1,0 +1,10 @@
+{
+    "type": "project",
+    "description": "simple abstract factory implementation",
+    "require": {
+        "phpunit/phpunit": "^11.5"
+    },
+    "autoload": {
+        "psr-4": {"App\\": "."}
+    }
+}
