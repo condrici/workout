@@ -3,12 +3,11 @@ declare(strict_types=1);
 
 namespace App\Src;
 
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\ContainerInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use ReflectionClass;
 use ReflectionException;
-
-use Psr\Container\ContainerInterface;
-use Psr\Container\ContainerExceptionInterface;
-use Psr\Container\NotFoundExceptionInterface;
 
 class ClassResolver
 {

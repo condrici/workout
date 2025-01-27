@@ -38,11 +38,11 @@ class Container implements ContainerInterface
     }
 
     /**
-     * @throws ReflectionException
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
+     * @throws ReflectionException
      */
-    public function resolveConstructor(string $namespace, array $args = []): object
+    public function resolveClass(string $namespace, array $args = []): object
     {
         return (new ClassResolver($this, $namespace, $args))->getInstance();
     }

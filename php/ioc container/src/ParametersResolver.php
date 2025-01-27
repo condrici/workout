@@ -3,10 +3,9 @@ declare(strict_types=1);
 
 namespace App\Src;
 
-use ReflectionParameter;
-use ReflectionException;
-
 use Psr\Container\ContainerInterface;
+use ReflectionException;
+use ReflectionParameter;
 
 class ParametersResolver
 {

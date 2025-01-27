@@ -13,7 +13,7 @@ use App\Src\Container;
 $container = new Container();
 $container->bind(ConfigInterface::class, PHPConfig::class);
 
-$app = $container->resolveConstructor(App::class, [
+$app = $container->resolveClass(App::class, [
     'arg1' => 'value1',
     'arg2' => 'value2'
 ]);
@@ -22,8 +22,6 @@ $value = $container->resolveMethod($app, 'handle', [
     'arg1' => 'value1',
     'arg2' => 'value2'
 ]);
-
-var_dump($value);
 
 /**
  * Test 1: App class with injected dependencies in constructor
