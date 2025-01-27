@@ -3,9 +3,10 @@ declare(strict_types=1);
 
 namespace App\Src;
 
-use Psr\Container\ContainerInterface;
 use ReflectionException;
 use ReflectionMethod;
+
+use Psr\Container\ContainerInterface;
 
 class MethodResolver
 {
