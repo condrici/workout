@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Src;
+namespace App\src\Command;
 
 class Invoker
 {

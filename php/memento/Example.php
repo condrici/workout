@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\Src\CloseTicketCommand;
-use App\Src\Invoker;
+use App\src\Command\CloseTicketCommand;
+use App\src\Command\Invoker;
 use App\Src\Ticket\Ticket;
 
 require_once ("vendor/autoload.php");

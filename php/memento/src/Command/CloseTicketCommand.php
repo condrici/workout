@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Src;
+namespace App\src\Command;
 
-use App\Src\Ticket\TicketStateMemento;
 use App\Src\Ticket\Ticket;
+use App\Src\Ticket\TicketStateMemento;
 
 class CloseTicketCommand implements Command
 {
