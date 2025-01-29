@@ -5,8 +5,8 @@ namespace App;
 
 require_once ("vendor/autoload.php");
 
+use App\src\Builder\CarBuilder;
 use App\Src\Director;
-use App\Src\CarBuilder;
 
 $director = new Director();
 $vehicle = $director->build(new CarBuilder());

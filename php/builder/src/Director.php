@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Src;
 
+use App\src\Builder\Builder;
 use App\src\Vehicle\Type\Vehicle;
 
 class Director

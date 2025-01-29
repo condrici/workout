@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Src;
+namespace App\src\Builder;
 
-use App\Src\Vehicle\Type\Truck;
-use App\src\Vehicle\Type\Vehicle;
 use App\Src\Vehicle\Components\Door;
 use App\Src\Vehicle\Components\Engine;
 use App\Src\Vehicle\Components\Wheel;
+use App\Src\Vehicle\Type\Truck;
+use App\src\Vehicle\Type\Vehicle;
 
 class TruckBuilder implements Builder
 {
