@@ -1,0 +1,11 @@
+{
+    "name": "app/app",
+    "description": "visitor",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "./"
+        }
+    },
+    "require": {}
+}
