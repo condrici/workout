@@ -3,10 +3,9 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\Src\Strategy\StrategyService;
-use Exception;
-
 use App\Src\Context;
+use App\Src\Strategy\Factory\BaseStrategyFactory;
+use Exception;
 
 require_once ("vendor/autoload.php");
 
@@ -27,8 +26,8 @@ class Application
     }
 }
 
-$strategyService = new StrategyService();
-$context = new Context($strategyService);
+$strategyFactory = new BaseStrategyFactory();
+$context = new Context($strategyFactory);
 $app = new Application($context);
 
 /**

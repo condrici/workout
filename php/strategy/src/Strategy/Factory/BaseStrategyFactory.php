@@ -1,11 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Src\Strategy;
+namespace App\Src\Strategy\Factory;
 
 use Exception;
 
-class StrategyService
+use App\Src\Strategy\Strategy;
+
+class BaseStrategyFactory implements StrategyFactory
 {
 
     /*
@@ -13,14 +15,15 @@ class StrategyService
      * in order to be automatically identified based on what follows after the prefix
      * i.e. ConcreteStrategyAdd is the class, while "add" is the action that can be used
      */
-    private const CONCRETE_STRATEGY_CLASS_PREFIX = 'ConcreteStrategy';
+    private const BASE_STRATEGY_NAMESPACE = 'App\\Src\\Strategy\\ConcreteStrategy';
 
     /**
      * @throws Exception
      */
-    public function findByActionOrThrow(string $action): Strategy
+    public function createByAction(string $action): Strategy
     {
-        $namespace = __NAMESPACE__ . '\\' . self::CONCRETE_STRATEGY_CLASS_PREFIX . ucfirst(strtolower($action));
+        $namespace = self::BASE_STRATEGY_NAMESPACE . ucfirst(strtolower($action));
+
         if (class_exists($namespace)) {
             return new $namespace;
         }

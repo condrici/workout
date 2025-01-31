@@ -3,15 +3,14 @@ declare(strict_types=1);
 
 namespace App\Src;
 
-use Exception;
-
 use App\src\Strategy\Strategy;
-use App\Src\Strategy\StrategyService;
+use App\Src\Strategy\Factory\StrategyFactory;
+use Exception;
 
 class Context
 {
 
-    public function __construct(private readonly StrategyService $strategyService)
+    public function __construct(private readonly StrategyFactory $strategyFactory)
     {
     }
 
@@ -21,13 +20,13 @@ class Context
     {
         $this->strategy = $strategy;
     }
-''
+
     /**
      * @throws Exception
      */
     public function setStrategyBasedOnAction(string $action): void
     {
-        $strategy = $this->strategyService->findByActionOrThrow($action);
+        $strategy = $this->strategyFactory->createByAction($action);
         $this->setStrategy($strategy);
     }
 
