@@ -11,6 +11,10 @@ use App\Src\Services\UiService;
 
 require_once ("vendor/autoload.php");
 
+/**
+ * Layer: Data Access Layer
+ */
+
 $data = [
     1 => [
         'firstName' => 'Agent',
@@ -19,7 +23,7 @@ $data = [
 ];
 
 /**
- * Layer: Data Access
+ * Layer: Data Access Abstraction Layer
  */
 
 $storageAdapter = new BaseStorageAdapter($data);
@@ -31,7 +35,7 @@ $ui = new UserRepositoryUiMediator(
 );
 
 /**
- * Layer: Presentation
+ * Layer: Presentation Layer
  */
 
 $user = $ui->getFullUsername(1);
