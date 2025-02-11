@@ -6,6 +6,13 @@ namespace App\Models;
 use App\Core\Database\ActiveRecordModel;
 use App\Core\Database\MySQLDatabaseConnection;
 
+/**
+ * Dynamically created properties should be added here
+ * so that the IDE can easily recognize them
+ *
+ * @property mixed|string $description
+ * @property int|mixed $bar_code
+ */
 class Product extends ActiveRecordModel
 {
     public function __construct()
