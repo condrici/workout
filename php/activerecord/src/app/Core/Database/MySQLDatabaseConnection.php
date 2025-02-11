@@ -1,17 +1,20 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Core;
+namespace App\Core\Database;
 
+use Exception;
 use PDO;
 use PDOException;
-use Exception;
 
 class MySQLDatabaseConnection implements PDODatabaseConnection
 {
     private static ?self $instance = null;
     private PDO $pdo;
 
+    /**
+     * @throws Exception
+     */
     private function __construct()
     {
         $dbName = DatabaseConfig::get(DatabaseConfig::DB_NAME);
