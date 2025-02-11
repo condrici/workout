@@ -17,6 +17,7 @@ class Product extends ActiveRecordModel
     /**
      * If the 'id' is set in $data
      * we assume that this is an UPDATE operation, otherwise it is a CREATE operation
+     * TODO: Move more code to the abstract
      */
     public function save(): bool
     {
