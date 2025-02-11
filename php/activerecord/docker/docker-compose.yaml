@@ -1,0 +1,62 @@
+version: "3"
+
+services:
+
+  # webserver
+  nginx:
+    build:
+      dockerfile: dockerfiles/nginx/Dockerfile
+    container_name:  '${COMPOSE_PROJECT_NAME}-nginx'
+    ports:
+      - "${HOST_MACHINE_UNSECURE_HOST_PORT}:80"
+    volumes:
+      - ../src/:/var/www/html
+      - ./config/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    links:
+      - php-fpm
+    networks:
+      - custom_network_identifier
+
+  # php
+  php-fpm:
+    build:
+      dockerfile: dockerfiles/php/Dockerfile
+    container_name:  '${COMPOSE_PROJECT_NAME}-php'
+    volumes:
+      - ../src/:/var/www/html
+    networks:
+      - custom_network_identifier
+
+  # mysql
+  mysql:
+    build:
+      dockerfile: ./dockerfiles/mysql/Dockerfile
+    container_name: '${COMPOSE_PROJECT_NAME}-mysql'
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: activerecord
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+    volumes:
+
+      # SQL code that the container will import in the MYSQL_DATABASE
+      #
+      # Attention
+      # How the migrations work
+      #
+      # Migrations are ran only if /var/lib/mysql is empty in the docker container
+      # Once the initial migration is performed, that folder will not be empty anymore
+      # Thus, /var/lib/mysql has to be deleted in order to perform subsequent migrations
+
+      - ../src/app/Database/Migrations:/docker-entrypoint-initdb.d
+    ports:
+      - "6033:3306"
+    networks:
+      custom_network_identifier:
+        aliases:
+          - mysql
+
+networks:
+  custom_network_identifier:
+    name: ${COMPOSE_PROJECT_NAME}
+    driver: bridge
