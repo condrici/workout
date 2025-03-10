@@ -16,8 +16,8 @@ class LogCommandBusMiddleware implements CommandBusMiddlewareInterface
     public function __invoke(CommandInterface $command, ?callable $next = null): void
     {
         try {
-            $this->preCommandLog($command);
-            if (isset($next)) {
+            if ($next) {
+                $this->preCommandLog($command);
                 $next($command);
             }
             $this->postCommandLog($command);
