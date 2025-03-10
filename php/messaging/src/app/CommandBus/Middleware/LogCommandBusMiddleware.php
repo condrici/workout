@@ -23,6 +23,7 @@ class LogCommandBusMiddleware implements CommandBusMiddlewareInterface
             $this->postCommandLog($command);
         } catch (\Exception $e) {
             $this->logException($command);
+            throw $e;
         }
     }
 
