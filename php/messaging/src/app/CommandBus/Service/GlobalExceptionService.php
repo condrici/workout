@@ -1,11 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\CommandBus\Exception;
+namespace App\CommandBus\Service;
 
-use ErrorException;
-
-class GlobalExceptionHandler
+class GlobalExceptionService
 {
     protected const CAPTURE_ERROR_LEVEL = E_ALL;
 
