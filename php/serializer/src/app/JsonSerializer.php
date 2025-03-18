@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Contracts\JsonStrategyInterface;
 use App\Contracts\SerializerInterface;
-use App\Strategy\JsonStrategyInterface;
 
 class JsonSerializer implements SerializerInterface
 {

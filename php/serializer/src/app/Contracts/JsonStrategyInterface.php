@@ -1,9 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Strategy;
-
-use App\Contracts\SerializerInterface;
+namespace App\Contracts;
 
 interface JsonStrategyInterface extends SerializerInterface
 {

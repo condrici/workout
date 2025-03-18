@@ -2,11 +2,11 @@
 declare(strict_types=1);
 
 use App\JsonSerializer;
-use App\Strategy\JsonDefaultStrategy;
+use App\Strategy\DefaultJsonStrategy;
 
 require_once (__DIR__ . '/../vendor/autoload.php');
 
-$serializerStrategy = new JsonDefaultStrategy();
+$serializerStrategy = new DefaultJsonStrategy();
 $serializer = new JsonSerializer($serializerStrategy);
 
 $test = new stdClass();

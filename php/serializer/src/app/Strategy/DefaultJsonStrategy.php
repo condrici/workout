@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App\Strategy;
 
-class JsonDefaultStrategy implements JsonStrategyInterface
+use App\Contracts\JsonStrategyInterface;
+
+class DefaultJsonStrategy implements JsonStrategyInterface
 {
     public function serialize(mixed $data): string
     {
