@@ -1,0 +1,78 @@
+version: "3"
+
+services:
+
+  # webserver
+  nginx:
+    build:
+      dockerfile: ./dockerfiles/nginx/Dockerfile
+    container_name:  '${COMPOSE_PROJECT_NAME}-nginx'
+    ports:
+      - "${HOST_MACHINE_UNSECURE_HOST_PORT}:80"
+    volumes:
+      - ../src/:/var/www/html
+      - ./config/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    links:
+      - php-fpm
+    networks:
+      - custom_network_identifier
+
+  # php
+  php-fpm:
+    build:
+      dockerfile: ./dockerfiles/php/Dockerfile
+    container_name:  '${COMPOSE_PROJECT_NAME}-php'
+    volumes:
+      - ../src/:/var/www/html
+
+      #########################################################################################################
+      # Xdebug configuration
+      #
+      # This is needed so that the host machine, can access to the xdebug output from the docker container
+      # Make sure to configure the xdebug.ini file with the hostname IP and PORT
+      #########################################################################################################
+
+      - ./config/php/xdebug.ini:/usr/local/etc/php/conf.d/docker-compose-xdebug.ini
+    ports:
+      - "6033:3306"
+    networks:
+      custom_network_identifier:
+        aliases:
+          - mysql
+
+  # mysql
+  mysql:
+    build:
+      dockerfile: ./dockerfiles/mysql/Dockerfile
+    container_name: '${COMPOSE_PROJECT_NAME}-mysql'
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: limitless_assets
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+    ports:
+      - "6034:3306"
+    volumes:
+      - ./volumes/mysql/data:/var/lib/mysql
+    networks:
+      - custom_network_identifier
+
+  # phpmyadmin
+  phpmyadmin:
+    build:
+      dockerfile: ./dockerfiles/phpmyadmin/Dockerfile
+    container_name: '${COMPOSE_PROJECT_NAME}-phpmyadmin'
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - "8085:80"
+    networks:
+      - custom_network_identifier
+
+networks:
+  custom_network_identifier:
+    name: ${COMPOSE_PROJECT_NAME}
+    driver: bridge
