@@ -33,6 +33,23 @@ services:
       #########################################################################################################
 
       - ./config/php/xdebug.ini:/usr/local/etc/php/conf.d/docker-compose-xdebug.ini
+
+    #########################################################################################################
+    # Pimcore installation settings
+    #
+    # TODO: move hardcoded env variables to .env (for the mysql container as well)
+    # These are required when using ./vendor/bin/pimcore-install (MYSQL_HOST_SOCKET = mysql host)
+    # For more information run ./vendor/bin/pimcore-install --help
+    #########################################################################################################
+
+    environment:
+      PIMCORE_INSTALL_MYSQL_HOST_SOCKET: mysql
+      PIMCORE_INSTALL_ADMIN_USERNAME: pimcore
+      PIMCORE_INSTALL_ADMIN_PASSWORD: pimcore
+      PIMCORE_INSTALL_MYSQL_USERNAME: docker
+      PIMCORE_INSTALL_MYSQL_PASSWORD: docker
+      PIMCORE_INSTALL_MYSQL_DATABASE: pimcore
+
     ports:
       - "6033:3306"
     networks:
