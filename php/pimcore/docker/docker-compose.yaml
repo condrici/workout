@@ -37,18 +37,17 @@ services:
     #########################################################################################################
     # Pimcore installation settings
     #
-    # TODO: move hardcoded env variables to .env (for the mysql container as well)
     # These are required when using ./vendor/bin/pimcore-install (MYSQL_HOST_SOCKET = mysql host)
     # For more information run ./vendor/bin/pimcore-install --help
     #########################################################################################################
 
     environment:
-      PIMCORE_INSTALL_MYSQL_HOST_SOCKET: mysql
-      PIMCORE_INSTALL_ADMIN_USERNAME: pimcore
-      PIMCORE_INSTALL_ADMIN_PASSWORD: pimcore
-      PIMCORE_INSTALL_MYSQL_USERNAME: docker
-      PIMCORE_INSTALL_MYSQL_PASSWORD: docker
-      PIMCORE_INSTALL_MYSQL_DATABASE: pimcore
+      PIMCORE_INSTALL_MYSQL_HOST_SOCKET: ${MYSQL_HOSTNAME}
+      PIMCORE_INSTALL_ADMIN_USERNAME: ${PIMCORE_ADMIN_USERNAME}
+      PIMCORE_INSTALL_ADMIN_PASSWORD: ${PIMCORE_ADMIN_PASSWORD}
+      PIMCORE_INSTALL_MYSQL_USERNAME: ${MYSQL_USERNAME}
+      PIMCORE_INSTALL_MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      PIMCORE_INSTALL_MYSQL_DATABASE: ${MYSQL_DATABASE}
 
     ports:
       - "6033:3306"
@@ -63,10 +62,10 @@ services:
       dockerfile: ./dockerfiles/mysql/Dockerfile
     container_name: '${COMPOSE_PROJECT_NAME}-mysql'
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: pimcore
-      MYSQL_USER: docker
-      MYSQL_PASSWORD: docker
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USERNAME}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - "6034:3306"
     volumes:
